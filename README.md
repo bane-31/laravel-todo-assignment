@@ -19,7 +19,7 @@ To run this project locally, you will need:
 
 1. **Clone the repository:**
 ```bash
-git clone 
+git clone https://github.com/bane-31/laravel-todo-assignment.git
 cd todo-app
 
 ```
