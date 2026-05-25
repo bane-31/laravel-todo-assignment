@@ -12,16 +12,16 @@ class TaskController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'title' => ['required', 'string', 'max:100'],
+            'task_title' => ['required', 'string', 'max:255'],
             'project_id' => ['required', 'integer', 'exists:projects,id'], 
         ]);
 
         $project = Project::findOrFail($validated['project_id']);
 
-        abort_if($project->user_id !== $request->user()->id, 403, 'Nemate pristup ovom projektu.');
+        abort_if($project->user_id !== $request->user()->id, 403, 'You don\'t have access to this project.');
 
         $project->tasks()->create([
-            'title' => $validated['title']
+            'title' => $validated['task_title']
         ]);
 
         return back();
